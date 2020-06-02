@@ -1,20 +1,29 @@
-function combine(input1, input2, 
-// This is a literal type usually used in conjunction with union types
-// now TS will enforce either of these two strings as accepted values
-// It's still up to you to verify the value in your function
-resultConversion) {
-    var result;
-    if (typeof input1 === 'number' && typeof input2 === 'number' || resultConversion === 'as-number') {
-        result = +input1 + +input2;
-    }
-    else {
-        result = input1.toString() + input2.toString();
-    }
-    return result;
+// return types of functions.
+// As we know functions can return stuff. These functions can also have a type
+// that is defined by typescript.
+// Here this function has a return type implicitly set as number.
+function add(n1, n2) {
+    return n1 + n2;
 }
-var combinedAges = combine(30, 26, 'as-number');
-console.log(combinedAges);
-var combinedStringAges = combine('30', '26', 'as-number');
-console.log(combinedStringAges);
-var combinedNames = combine("jimmy", "shirley", 'as-text');
-console.log(combinedNames);
+// explitictly setting return type
+function addWithReturnType(n1, n2) {
+    return n1 + n2;
+}
+// if we expcitly set a return type and the type doesn't match then TS will
+// throw an error
+// function subtract(n1: number, n2: number): string {
+//   return n1 - n2; // Error!
+// }
+// void return types
+// let's say we print the result of addWithReturnType:
+function printResult(n) {
+    console.log('Result: ' + n);
+}
+// Even though the function prints something to the console, the return 
+// type as seen by TS is actually void. see it by hovering over 
+// 'printResult' in VSCode
+printResult(addWithReturnType(5, 12));
+// this is despite the fact that running a function with no return values
+// actually returns 'undefined' in javascript. See in Chrome's console after we
+// run printResult() with the add() function and log what it returns
+console.log(printResult(5)); // 
