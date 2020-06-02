@@ -1,34 +1,29 @@
-const person: { 
-  // you typically don't need to explicity declare these types since TS is
-  // smart enough to infer their types (maybe you want the string[] type for
-  // a more explicit definition). But you will need to declare it for the tuple
+// this is how you declare enums. enum is a custom TS type followed by the name
+// of the enum. Inside you declare all the enums you whish to declare without
+// any form of quotations. In the background, each value is assigned a number
+enum Role {
+  ADMIN,
+  READ_ONLY,
+  AUTHOR
+}
+
+const person: {
   name: string; 
   age: number;
   hobbies: string[];
-  role: [number, string];
+  role: Role;
 } = {
   name: "Jimmy",
   age: 30,
   hobbies: ['Sports', 'Cooking'],
-  // this is a tuple, a tuple is a fixed length array
-  // first is a numeric identifier second is string identifier
-  role: [2, 'author']
+  role: Role.ADMIN
 }
 
-// Even though we've declared a fixed array in our person Type, the push()
-// method is an exception here that. But it will stop the next line which is
-// assigning the second value in the array with a number when it should be a
-// string instead.
-// person.role.push('admin');
-// person.role[1] = 10;
-
-person.role = [0, 'admin']; // reassigning the value is allowed...
-// person.role = [0, 'admin', 'user']; // but this will be caught by TS
 
 let favouriteActivities: string[];
 
-
 console.log(person.name);
+console.log(person.role);
 
 for (const hobby of person.hobbies) {
   console.log(hobby.toUpperCase());
