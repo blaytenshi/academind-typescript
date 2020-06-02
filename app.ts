@@ -1,10 +1,13 @@
+// create your on custom type
+// use the type keyword (surprisingly not a keyword in JS) and give the type a
+// name, in this case 'Combinable'
+type Combinable = number | string;
+type ConversionDescriptor = 'as-number' | 'as-text'
+
 function combine(
-  input1: number | string, 
-  input2: number | string,
-  // This is a literal type usually used in conjunction with union types
-  // now TS will enforce either of these two strings as accepted values
-  // It's still up to you to verify the value in your function
-  resultConversion: 'as-number' | 'as-text'
+  input1: Combinable, 
+  input2: Combinable,
+  resultConversion: ConversionDescriptor
 ) {
   let result;
   if (typeof input1 === 'number' && typeof input2 === 'number' || resultConversion === 'as-number') {
