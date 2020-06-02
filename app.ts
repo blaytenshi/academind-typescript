@@ -15,8 +15,10 @@ const person: {
   role: [2, 'author']
 }
 
-// if we didn't declare a type then we could dangerously add to the array
-// as well as modify it
+// Even though we've declared a fixed array in our person Type, the push()
+// method is an exception here that. But it will stop the next line which is
+// assigning the second value in the array with a number when it should be a
+// string instead.
 person.role.push('admin');
 person.role[1] = 10;
 
