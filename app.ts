@@ -1,29 +1,27 @@
-// this is how you declare enums. enum is a custom TS type followed by the name
-// of the enum. Inside you declare all the enums you whish to declare without
-// any form of quotations. In the background, each value is assigned a number
+// you can also choose to start at a certain number so...
 enum Role {
-  ADMIN,
-  READ_ONLY,
-  AUTHOR
+  ADMIN = 4,
+  READ_ONLY, // 5
+  AUTHOR // 6
 }
 
 const person: {
   name: string; 
   age: number;
   hobbies: string[];
-  role: Role;
+  role: Role; // give it the type!
 } = {
   name: "Jimmy",
   age: 30,
   hobbies: ['Sports', 'Cooking'],
-  role: Role.ADMIN
+  role: Role.AUTHOR
 }
 
 
 let favouriteActivities: string[];
 
 console.log(person.name);
-console.log(person.role);
+console.log("Role value", person.role); // should log out 6
 
 for (const hobby of person.hobbies) {
   console.log(hobby.toUpperCase());
