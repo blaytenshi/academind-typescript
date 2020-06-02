@@ -19,8 +19,11 @@ const person: {
 // method is an exception here that. But it will stop the next line which is
 // assigning the second value in the array with a number when it should be a
 // string instead.
-person.role.push('admin');
-person.role[1] = 10;
+// person.role.push('admin');
+// person.role[1] = 10;
+
+person.role = [0, 'admin']; // reassigning the value is allowed...
+// person.role = [0, 'admin', 'user']; // but this will be caught by TS
 
 let favouriteActivities: string[];
 
