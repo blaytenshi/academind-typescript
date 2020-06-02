@@ -1,35 +1,30 @@
 const person: { 
-  // here we're providing the variable with a Type. 
-  // This to describe what the properties the object should contain and what
-  // types of values should be in the said properties.
+  // you typically don't need to explicity declare these types since TS is
+  // smart enough to infer their types (maybe you want the string[] type for
+  // a more explicit definition). But you will need to declare it for the tuple
   name: string; 
   age: number;
-  // arrays can have hold specific types or mixed types. Here's a string array.
-  hobbies: string[]
+  hobbies: string[];
+  role: [number, string];
 } = {
   name: "Jimmy",
   age: 30,
-  hobbies: ['Sports', 'Cooking']
+  hobbies: ['Sports', 'Cooking'],
+  // this is a tuple, a tuple is a fixed length array
+  // first is a numeric identifier second is string identifier
+  role: [2, 'author']
 }
 
-// you can also seperately define variables of arrays and give them types
-let favouriteActivities: string[];
-// will throw an error because it's not an array
-// favouriteActivities = "sports"; 
-// will also throw an array because it's a mixed type
-// favouriteActivities = ["Sports", 1]
+// if we didn't declare a type then we could dangerously add to the array
+// as well as modify it
+person.role.push('admin');
+person.role[1] = 10;
 
-// this allows an array of mixed types
-let anyActivities: any[];
-anyActivities = ['Sports', 1]
+let favouriteActivities: string[];
+
 
 console.log(person.name);
 
 for (const hobby of person.hobbies) {
-  // here toUpperCase() doesn't throw an error because TS correctly identifies
-  // that hobbies is a string array and thus will also do autocomplete for you
   console.log(hobby.toUpperCase());
-  // this will throw an error because the string object doesn't 
-  // have a map() function
-  // console.log(hobby.map());
 }
