@@ -1,21 +1,19 @@
-// this is how you declare enums. enum is a custom TS type followed by the name
-// of the enum. Inside you declare all the enums you whish to declare without
-// any form of quotations. In the background, each value is assigned a number
+// you can also choose to start at a certain number so...
 var Role;
 (function (Role) {
-    Role[Role["ADMIN"] = 0] = "ADMIN";
-    Role[Role["READ_ONLY"] = 1] = "READ_ONLY";
-    Role[Role["AUTHOR"] = 2] = "AUTHOR";
+    Role[Role["ADMIN"] = 4] = "ADMIN";
+    Role[Role["READ_ONLY"] = 5] = "READ_ONLY";
+    Role[Role["AUTHOR"] = 6] = "AUTHOR"; // 6
 })(Role || (Role = {}));
 var person = {
     name: "Jimmy",
     age: 30,
     hobbies: ['Sports', 'Cooking'],
-    role: Role.ADMIN
+    role: Role.AUTHOR
 };
 var favouriteActivities;
 console.log(person.name);
-console.log(person.role);
+console.log("Role value", person.role); // should log out 6
 for (var _i = 0, _a = person.hobbies; _i < _a.length; _i++) {
     var hobby = _a[_i];
     console.log(hobby.toUpperCase());

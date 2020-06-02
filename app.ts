@@ -1,8 +1,10 @@
-// you can also choose to start at a certain number so...
+// you can can even set it whatever you like but usually just numbers
 enum Role {
   ADMIN = 4,
-  READ_ONLY, // 5
-  AUTHOR // 6
+  READ_ONLY = 100,
+  AUTHOR = 'AUTHOR',
+  // will throw an error because TS can't infer the next value after author
+  // USER
 }
 
 const person: {
@@ -21,7 +23,7 @@ const person: {
 let favouriteActivities: string[];
 
 console.log(person.name);
-console.log("Role value", person.role); // should log out 6
+console.log("Role value", person.role); // should log out AUTHOR
 
 for (const hobby of person.hobbies) {
   console.log(hobby.toUpperCase());
