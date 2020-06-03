@@ -1,39 +1,33 @@
-// return types of functions.
-// As we know functions can return stuff. These functions can also have a type
-// that is defined by typescript.
-// Here this function has a return type implicitly set as number.
-function add(n1: number, n2: number) {
+// Function types
+// back to our original add function
+function add(n1: number, n2: number): number {
   return n1 + n2;
 }
+// takes two number types and returns a number type
 
-// explitictly setting return type
-function addWithReturnType(n1: number, n2: number): number {
-  return n1 + n2;
-}
+// now in normal JS we can do this, assign the function to a variable and call it
+// const combine = add;
+// console.log(combine(5, 11)); // should log 16
 
-// if we expcitly set a return type and the type doesn't match then TS will
-// throw an error
-// function subtract(n1: number, n2: number): string {
-//   return n1 - n2; // Error!
-// }
+// but if we all of a sudden assign the combine varible to a value that's not a
+// function, things will break because it's supposed to be a function!
 
-// void return types
-// let's say we print the result of addWithReturnType:
-function printResult(n: number) {
-  console.log('Result: ' + n);
-}
-// Even though the function prints something to the console, the return 
-// type as seen by TS is actually void. see it by hovering over 
-// 'printResult' in VSCode
+// combine = 5;
+// console.log(combine(5, 11)); // error! You can't invoke a value of 5!
 
-printResult(addWithReturnType(5, 12));
+// How do we declare a type of Function? Well, you can actually add the keyword
+// Function to the end of the combine variable resulting in:
 
-// this is despite the fact that running a function with no return values
-// actually returns 'undefined' in javascript. See in Chrome's console after we
-// run printResult() and log what it returns
-console.log(printResult(5)); // should just print 5 but what does it return...?
-// undefined! It's a javascript value
+// const combine: Function = add
 
-// In TS if your function doesn't have a return value you should set the return
-// value as void. Only set it as undefined if you actually want to return
-// undefined as a value from your function.
+// This tells TS to expect a function, ANY function to be the type of value
+// to be passed in.
+
+// You can actually be even more specific with the following syntax!
+// Here instead of staying it's just a function, we're indicating to TS (with
+// what looks like an arrow function) the number of parameters the function
+// accepts (2; a and b), their respective types (both numbers) and the return
+// type after the arrow (=>) also a number.
+// Now, even if we assign the a function to the combine variable, TS will check
+// to make sure that the parameters and return type of the function matches.
+const combine: (a: number, b:number) => number = add;
