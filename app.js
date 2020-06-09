@@ -1,13 +1,11 @@
-// callback functions as parameters
-// you declare the function type exactly as you would for a normal function!
-// the parameter that the callback function accepts is the result which is a
-// number type and because the actual function doesn't return anything, the 
-// return type is void!
-function addWithCallback(n1, n2, cb) {
-    var result = n1 + n2;
-    // don't need to redeclare the types here because it's already declared up top
-    cb(result);
+// never return type
+// let's say we have a function that generates error objects and throws them
+// the function doesn't return void or undefined. It actually never returns
+// anything, hence 'never'.
+function generateError(message, code) {
+    throw { message: message, code: code };
 }
-addWithCallback(10, 20, function (result) {
-    console.log(result); // should still log 30
-});
+// in fact, if we call the function and set the assigned result to a variable
+// and then try to log the variable, we actually get nothing:
+var result = generateError('An error occured!', 500);
+console.log('result', result);
