@@ -1,17 +1,25 @@
-// callback functions as parameters
-// you declare the function type exactly as you would for a normal function!
-// the parameter that the callback function accepts is the result which is a
-// number type and because the actual function doesn't return anything, the 
-// return type is void!
-function addWithCallback(n1: number, n2: number, cb: (result: number) => void) {
-  const result = n1 + n2;
-  // don't need to redeclare the types here because it's already declared up top
-  cb(result);
-}
+// unknown types
+// There is another type in TS called unknown. It is used for scenarios for when
+// we don't know what type is going to be provided. If you think to say an
+// HTML InputField, the value that comes in could be a number, a boolean or a
+// string. Depending on the way you build your component you may not know what
+// the value type will be. So you can set this to unknown.
+let userInput: unknown;
 
-// now here you can't add a second parameter in the callback function without
-// updating the parameter types in list of parameters within addWithCallback()
-// function.
-addWithCallback(10, 20, function (result) {
-  console.log(result); // should still log 30
-})
+// you can actually assign any value to unknown
+userInput = 5;
+userInput = "Jimmeh";
+
+// so how is it different to the type of any?
+// it's different in the way that it's slightly more restrictive than any.
+// you cannot directly assign a variable that is typed value to another variable
+// with a fixed type without FIRST checking it:
+
+// userName has string as the fixed type
+let userName: string 
+// userName = userInput; // should be "Jimmeh" but TS won't allow it! Error!
+
+// so we wrap it in an if statement and TS will look for this!
+if (typeof userInput === 'string') {
+  userName = userInput; // now it will allow you to assign it!
+}
