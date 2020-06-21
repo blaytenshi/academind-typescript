@@ -1,46 +1,24 @@
-// Let's say we have a Subject class that allows you to add students to an
-// array list of strings as well as print information about the students in
-// that string array list.
-class Subject {
-    private name: string;
+// there's a shortcut to initialising in typescript along with 
+// access modifiers. Using the example below we won't need to declare
+// fields using field syntax and assign them within the parameters passed
+// into the constructor function
+class Vehicle {
+    // private name: string;
+    // private passengers: string[];
 
-    // however we don't want people modifying or accessing these properties
-    // or even some methods directly from the object instance.
-    // by puttng in private, ts will limit them to being only accessible
-    // from within the class.
-    
-    // There are two other access modifiers and we'll
-    // look at them later (protected and readonly). Access modifies can be
-    // applied to both fields and methods.
-    private students: string[] = [];
-
-    constructor(n: string) {
-        this.name = n;
+    constructor(private name: string, private passengers: string[]) {
+        // this.name = name;
+        // this.passengers = passengers;
     }
 
-    describe(this: Subject) {
-        console.log('Class Name:', this.name);
-    }
-
-    addStudent(student: string) {
-        this.students.push(student);
-    }
-
-    printStudentInformation() {
-        console.log(this.students.length);
-        console.log(this.students);
+    describe(this: Vehicle) {
+        console.log(`Vehicle name: ${this.name}, passengers: ${this.passengers}`);
     }
 }
 
-const physics101 = new Subject('Physics101');
+const passengers: string[] = [ 'Jimmy', 'Shirley' ];
 
-physics101.addStudent('Jimmy');
-physics101.addStudent('Shirley');
+const car = new Vehicle('Baymax', passengers);
 
-physics101.printStudentInformation();
+car.describe();
 
-// won't work because the student's array is private
-// physics101.students[2] = 'John';
-
-// also won't work for the same reason.
-// physics101.name = 'CompSci101';
