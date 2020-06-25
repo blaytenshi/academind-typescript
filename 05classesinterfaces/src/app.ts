@@ -1,33 +1,54 @@
-// there's a shortcut to initialising in typescript along with 
-// access modifiers. Using the example below we won't need to declare
-// fields using field syntax and assign them within the parameters passed
-// into the constructor function
-class Vehicle {
-    // private name: string;
-    // private passengers: string[];
+class Computer {
 
-    // you can also add readonly here to prevent the value from being
-    // changed after it is initialised
-    constructor(private readonly name: string, private passengers: string[]) {
-        // this.name = name;
-        // this.passengers = passengers;
+    private readonly ssd: string[] = [];
+
+    constructor(
+        private readonly serialNumber: number,
+        private readonly cpu: string = "intel", 
+        private readonly ram: string = "hynix", 
+        private readonly gpu: string = "nvidia"
+    ) {
+
     }
 
-    describe(this: Vehicle) {
-        console.log(`Vehicle name: ${this.name}, passengers: ${this.passengers}`);
+    describe() {
+        console.log(`serialNumber ${this.serialNumber} cpu ${this.cpu} hdd ${this.ram} gpu ${this.gpu}`);
     }
 
-    changeVehicleName(newName: string) {
-        // this line will throw an error because we've set the name as
-        // readonly in the constructor function above
-        // this.name = newName;
-        console.log(`can\'t change the name of the vehicle to ${newName} as it\'s readonly`);
+    writeHdd(value: string) {
+        this.ssd.push(value);
     }
 }
 
-const passengers: string[] = [ 'Jimmy', 'Shirley' ];
+class Macbook extends Computer {
+    // let's create an os variable only found in macbooks
+    fingerprintReader: boolean;
 
-const car = new Vehicle('Baymax', passengers);
+    // if you don't declare your own constructor function, it will use
+    // the base class's constructor as the default
 
-car.describe();
-car.changeVehicleName('Waymax');
+    // if you do declare your own constructor function you need to call
+    // super as it is needed by js
+    constructor(id: number, fingerprintReader: boolean) {
+        super(id);
+        // any references to 'this' must be called after the super() call
+        // as it will overwrite/add to the fields/fuctions of the object 
+        // returned by super()
+        this.fingerprintReader = fingerprintReader;
+    }
+}
+
+class Surfacebook extends Computer {
+    digitalPen: boolean;
+
+    constructor(id: number, digitalPen: boolean) {
+        super(id);
+        this.digitalPen = digitalPen;
+    }
+}
+
+const jimmysMacbook = new Macbook(5, true);
+const jimmysSurfacebook = new Surfacebook(1, false);
+
+console.log('jimmysmacbook', jimmysMacbook);
+console.log('jimmyssurfacebook', jimmysSurfacebook);

@@ -1,18 +1,33 @@
 "use strict";
-class Vehicle {
-    constructor(name, passengers) {
-        this.name = name;
-        this.passengers = passengers;
+class Computer {
+    constructor(serialNumber, cpu = "intel", ram = "hynix", gpu = "nvidia") {
+        this.serialNumber = serialNumber;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.gpu = gpu;
+        this.ssd = [];
     }
     describe() {
-        console.log(`Vehicle name: ${this.name}, passengers: ${this.passengers}`);
+        console.log(`serialNumber ${this.serialNumber} cpu ${this.cpu} hdd ${this.ram} gpu ${this.gpu}`);
     }
-    changeVehicleName(newName) {
-        console.log(`can\'t change the name of the vehicle to ${newName} as it\'s readonly`);
+    writeHdd(value) {
+        this.ssd.push(value);
     }
 }
-const passengers = ['Jimmy', 'Shirley'];
-const car = new Vehicle('Baymax', passengers);
-car.describe();
-car.changeVehicleName('Waymax');
+class Macbook extends Computer {
+    constructor(id, fingerprintReader) {
+        super(id);
+        this.fingerprintReader = fingerprintReader;
+    }
+}
+class Surfacebook extends Computer {
+    constructor(id, digitalPen) {
+        super(id);
+        this.digitalPen = digitalPen;
+    }
+}
+const jimmysMacbook = new Macbook(5, true);
+const jimmysSurfacebook = new Surfacebook(1, false);
+console.log('jimmysmacbook', jimmysMacbook);
+console.log('jimmyssurfacebook', jimmysSurfacebook);
 //# sourceMappingURL=app.js.map
